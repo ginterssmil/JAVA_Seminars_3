@@ -18,5 +18,9 @@ public class GuestUser {
 		setId();
 	}
 	
+	public String toString() {
+		String result = " " + id;
+		return result;
+	}
 	
 }
