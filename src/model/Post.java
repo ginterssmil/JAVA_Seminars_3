@@ -1,32 +1,37 @@
 package model;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 
 public class Post {
-	String msg;
-	Date date;
-	int countOfLikes;
+	private String msg;
+	private LocalDateTime datetime = LocalDateTime.now();
+	private int countOfLikes = 0;//TODO parvidot uz sarakstu ar registretiem lietotajiem...
 	
 	
 	public String getMsg() {
 		return msg;
 	}
-	public Date getDate() {
-		return date;
+	public LocalDateTime getDateTime() {
+		return datetime;
 	}
 	public int getCountOfLikes() {
-		return countOfLikes();
+		return countOfLikes;
 	}
 	
 	
 	public void setMsg(String inputMsg) {
-		this.msg = msg;
+		if((inputMsg != null) && (!inputMsg.isEmpty()) && (inputMsg.length() < 1000) ) {
+			msg = inputMsg;
+		}
+		else {
+			msg = "Unknown post";
+		}
 	}
-	public void setDate(Date inputDate) {
-		this.date = date;
-	}
-	public void setCountIfLikes(int iputCountOfLikes) {
-		this.countOfLikes = countOfLikes;
+	public void setDate() {
+		datetime = LocalDateTime.now();
+		}
+	public void incrementCountOfLikes() {
+		countOfLikes++;
 	}
 	
 	
