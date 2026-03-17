@@ -36,7 +36,17 @@ public class Post {
 	
 	
 	
+	public Post() {
+			setMsg("Sveiciens");
+		}
 	
+	public Post(String inputMsg) {
+		setMsg(inputMsg);
+	}
 	
+	public String toString() {
+		String result = msg + "posted at: " + datetime + " , likes: " + countOfLikes;
+		return result;
+	}
 	
 }
