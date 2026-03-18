@@ -1,10 +1,9 @@
-package model.users;
+package model_users;
 
 import java.security.MessageDigest;
 
 public class RegisteredUser extends GuestUser{
 	private String username;
-	private String title;
 	private String password;
 	
 	
@@ -12,9 +11,7 @@ public class RegisteredUser extends GuestUser{
 	public String getUsername() {
 		return username;
 	}
-	public String getTitle() {
-		return title;
-	}
+
 	public String getPassword() {
 		return password;
 	}
@@ -28,17 +25,21 @@ public class RegisteredUser extends GuestUser{
 			username = "DefaultUser";
 		}
 	}
-	public void setTitle(String inputTitle) {
-		
-	}
+	
+	//regex maska parolei: https://uibakery.io/regex-library/password
 	public void setPassword(String inputPassword) {
-		try {
-		MessageDigest md = MessageDigest.getInstance("MD5");
-		md.update(inputPassword.getBytes());
-		password = md.digest().toString();
+		if(inputPassword != null && inputPassword.isEmpty() && inputPassword.matches("/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/")) {	
+			try {
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			md.update(inputPassword.getBytes());
+			password = md.digest().toString();
+			}
+			catch(Exception e) {
+				password = "0000";
+			}
 		}
-		catch(Exception e) {
-			
+		else {
+			password = "0000";
 		}
 	}
 	

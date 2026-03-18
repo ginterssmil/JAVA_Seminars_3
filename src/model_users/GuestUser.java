@@ -1,4 +1,4 @@
-package model.users;
+package model_users;
 
 public class GuestUser {
 	private long id;
