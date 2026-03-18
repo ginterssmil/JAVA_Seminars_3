@@ -8,7 +8,7 @@ public class Page {
 	private String title;
 	private String description;
 	private ArrayList<RegisteredUser> allPageFollowers = new ArrayList<RegisteredUser>();
-	private ArrayList<Post> allPostsInPAge = new ArrayList<Post>();
+	private ArrayList<Post> allPostsInPage = new ArrayList<Post>();
 	
 	
 	public String getTitle() {
@@ -21,7 +21,7 @@ public class Page {
 		return allPageFollowers;
 	}
 	public ArrayList<Post> getAllPostsInPAge() {
-		return allPostsInPAge;
+		return allPostsInPage;
 	}
 	
 	
@@ -34,7 +34,7 @@ public class Page {
 		}
 	}
 	public void setDescription(String inputDescription) {
-		if(inputDescription != null && !inputDescription.isEmpty() && inputDescription.matches("[A-Z]{1}[A-Za-z0-9 ,.]{3,10}")) {
+		if(inputDescription != null && !inputDescription.isEmpty() && inputDescription.matches("[A-Z]{1}[A-Za-z0-9 ,.]{3,100}")) {
 			description = inputDescription;
 		}
 		else {
@@ -42,6 +42,20 @@ public class Page {
 		}
 	}
 	
+	public Page() {
+		setTitle("UnknownTitle");
+		setDescription("Empty");
+	}
 	
+
+	public Page(String inputTitle, String inputDescription) {
+		setTitle(inputTitle);
+		setDescription(inputDescription);
+	}
+	
+	public String toString() {
+		String result = title + "\n" + "Description: \n" + description + "sludinajumi: \n " + allPostsInPage + "\n"  + " \n " + "Sekotaji: \n" + allPageFollowers + "\n";
+		return result;
+	}
 	
 }
