@@ -43,9 +43,22 @@ public class RegisteredUser extends GuestUser{
 		}
 	}
 	
+	public RegisteredUser() {
+		super();
+		setUsername("Default");
+		setPassword("Password_123");
+	}
 	
+	public RegisteredUser(String inputUsername, String inputPassword) {
+		super();
+		setUsername(inputUsername);
+		setPassword(inputPassword);
+	}
 	
-	
+	public String toString() {
+		String result = id + ", " + username + ",  "+ password + " "; 
+		return result;
+	}
 	
 	
 	
