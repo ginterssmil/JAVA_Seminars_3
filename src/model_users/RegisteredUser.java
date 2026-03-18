@@ -2,7 +2,10 @@ package model_users;
 
 import java.security.MessageDigest;
 
-public class RegisteredUser extends GuestUser{
+import model_enums.PostType;
+import service.IPostPublish;
+
+public class RegisteredUser extends GuestUser implements IPostPublish{
 	private String username;
 	private String password;
 	
@@ -58,6 +61,12 @@ public class RegisteredUser extends GuestUser{
 	public String toString() {
 		String result = id + ", " + username + ",  "+ password + " "; 
 		return result;
+	}
+
+	@Override
+	public void createAndPublishPost(String inputMsg, PostType inputPostType) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	
