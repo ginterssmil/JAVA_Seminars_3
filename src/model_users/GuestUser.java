@@ -1,6 +1,6 @@
 package model_users;
 
-public class GuestUser {
+public class GuestUser{
 	protected long id;
 
 	private static long counter = 1;

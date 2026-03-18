@@ -33,7 +33,7 @@ public class PrivateUser extends RegisteredUser{
 	}
 
 	public String toString() {
-		String result = super.toString() + "sludinajumi: \n " + allPrivatePosts + "\n" + allPublicPosts + " \n " + "Sekotaji: \n" + allMyFollowers;
+		String result = "\n" + super.toString() + "\n" + "sludinajumi: \n " + allPrivatePosts + "\n" + allPublicPosts + " \n " + "Sekotaji: \n" + allMyFollowers + "\n";
 		return result;
 	}
 

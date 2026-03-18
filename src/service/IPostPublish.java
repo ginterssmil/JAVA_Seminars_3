@@ -1,6 +1,5 @@
 package service;
 
-import model.Post;
 import model_enums.PostType;
 
 public interface IPostPublish {

@@ -1,9 +1,11 @@
 package model_users;
 
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import model_enums.PostType;
 import service.IPostPublish;
+import service.MainService;
 
 public class RegisteredUser extends GuestUser implements IPostPublish{
 	private String username;
@@ -21,7 +23,7 @@ public class RegisteredUser extends GuestUser implements IPostPublish{
 	
 	
 	public void setUsername(String inputUsername) {
-		if( inputUsername != null && inputUsername.isEmpty() && inputUsername.matches("[A-Za-z0-9]{4-20}")) {
+		if( inputUsername != null && !inputUsername.isEmpty() && inputUsername.matches("[A-Za-z0-9]{4,20}")) {
 			username = inputUsername;
 		}
 		else {
@@ -31,11 +33,11 @@ public class RegisteredUser extends GuestUser implements IPostPublish{
 	
 	//regex maska parolei: https://uibakery.io/regex-library/password
 	public void setPassword(String inputPassword) {
-		if(inputPassword != null && inputPassword.isEmpty() && inputPassword.matches("/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/")) {	
+		if(inputPassword != null && !inputPassword.isEmpty() && inputPassword.matches("[A-Za-z0-9 !@#$%^&*]{1,20}")) {	
 			try {
 			MessageDigest md = MessageDigest.getInstance("MD5");
 			md.update(inputPassword.getBytes());
-			password = md.digest().toString();
+			password = new String(md.digest());
 			}
 			catch(Exception e) {
 				password = "0000";
@@ -49,7 +51,7 @@ public class RegisteredUser extends GuestUser implements IPostPublish{
 	public RegisteredUser() {
 		super();
 		setUsername("Default");
-		setPassword("Password_123");
+		setPassword("Password@123");
 	}
 	
 	public RegisteredUser(String inputUsername, String inputPassword) {
@@ -61,6 +63,24 @@ public class RegisteredUser extends GuestUser implements IPostPublish{
 	public String toString() {
 		String result = id + ", " + username + ",  "+ password + " "; 
 		return result;
+	}
+	
+	public boolean login(String inputUsername, String inputPassword) throws NoSuchAlgorithmException {
+		for(GuestUser tempU : MainService.getAllUsers()) {
+			if( tempU instanceof RegisteredUser) {
+				RegisteredUser tempRU = (RegisteredUser) tempU;
+				
+				MessageDigest md = MessageDigest.getInstance("MD5");
+				md.update(inputPassword.getBytes());
+				String inputPasswordEncoded = new String(md.digest());
+				
+				
+				if(tempRU.getUsername().equals(inputUsername) && tempRU.getPassword().equals(inputPasswordEncoded)) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	@Override
